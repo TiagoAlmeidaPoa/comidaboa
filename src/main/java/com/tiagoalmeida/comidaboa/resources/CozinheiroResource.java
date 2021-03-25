@@ -3,27 +3,27 @@ package com.tiagoalmeida.comidaboa.resources;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tiagoalmeida.comidaboa.domain.Cozinheiro;
+import com.tiagoalmeida.comidaboa.service.CozinheiroService;
 
 @RestController
 @RequestMapping(value = "/cozinheiros")
 public class CozinheiroResource {
-	
-	@RequestMapping(method = RequestMethod.GET)
-	public List<Cozinheiro> listar() {
-		
-		Cozinheiro coz1 = new Cozinheiro(1, "José", "85967485");
-		Cozinheiro coz2 = new Cozinheiro(2, "Pedro", "96857485");
-		
-		List<Cozinheiro> lista = new ArrayList<>();
-		lista.add(coz1);
-		lista.add(coz2);
-		
-		return lista;
+
+	@Autowired
+	private CozinheiroService service;
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> find(@PathVariable Integer id) {
+		Cozinheiro obj = service.buscarPorId(id);
+		return ResponseEntity.ok().body(obj);
 	}
 
 }
