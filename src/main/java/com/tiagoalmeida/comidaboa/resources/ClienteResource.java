@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tiagoalmeida.comidaboa.domain.Cozinheiro;
-import com.tiagoalmeida.comidaboa.service.CozinheiroService;
+import com.tiagoalmeida.comidaboa.domain.Cliente;
+import com.tiagoalmeida.comidaboa.service.ClienteService;
 
 @RestController
-@RequestMapping(value = "/cozinheiros")
-public class CozinheiroResource {
+@RequestMapping(value = "/clientes")
+public class ClienteResource {
 
 	@Autowired
-	private CozinheiroService service;
+	private ClienteService service;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Cozinheiro obj = service.buscarPorId(id);
+		Cliente obj = service.buscarPorId(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
