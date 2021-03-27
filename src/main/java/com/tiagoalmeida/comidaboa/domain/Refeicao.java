@@ -8,27 +8,39 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Cliente implements Serializable{
+public class Refeicao implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private String telefone;
+	private Double valor;
+	private String endereco;
+	private Integer quantidade;
 	
-	@OneToMany(mappedBy = "cliente")
+	@ManyToOne
+	@JoinColumn(name = "cozinheiro_id")
+	private Cozinheiro cozinheiro;
+	
+	@OneToMany(mappedBy = "refeicao")
 	private List<Pedido> pedidos = new ArrayList<>();
-	
-	public Cliente() {}
+			
+	public Refeicao() {}
 
-	public Cliente(Integer id, String nome, String telefone) {
+	public Refeicao(Integer id, String nome, Double valor, String endereco, Integer quantidade, Cozinheiro cozinheiro) {
+		super();
 		this.id = id;
 		this.nome = nome;
-		this.telefone = telefone;
+		this.valor = valor;
+		this.endereco = endereco;
+		this.quantidade = quantidade;
+		this.cozinheiro = cozinheiro;
 	}
 
 	public Integer getId() {
@@ -47,12 +59,36 @@ public class Cliente implements Serializable{
 		this.nome = nome;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public Double getValor() {
+		return valor;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setValor(Double valor) {
+		this.valor = valor;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+		
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public Cozinheiro getCozinheiro() {
+		return cozinheiro;
+	}
+
+	public void setCozinheiro(Cozinheiro cozinheiro) {
+		this.cozinheiro = cozinheiro;
 	}
 	
 	
@@ -63,6 +99,10 @@ public class Cliente implements Serializable{
 
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
@@ -81,13 +121,15 @@ public class Cliente implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cliente other = (Cliente) obj;
+		Refeicao other = (Refeicao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
+	}
+	
+		
 
 }

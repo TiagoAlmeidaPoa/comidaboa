@@ -1,11 +1,14 @@
 package com.tiagoalmeida.comidaboa.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cozinheiro implements Serializable{
@@ -15,7 +18,10 @@ public class Cozinheiro implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private String telefone;
+	private String telefone;		
+	
+	@OneToMany(mappedBy = "cozinheiro")
+	private List<Refeicao> refeicoes = new ArrayList<>();
 	
 	public Cozinheiro() {}
 
@@ -48,6 +54,15 @@ public class Cozinheiro implements Serializable{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+	
+
+	public List<Refeicao> getRefeicoes() {
+		return refeicoes;
+	}
+
+	public void setRefeicoes(List<Refeicao> refeicoes) {
+		this.refeicoes = refeicoes;
+	}
 
 	@Override
 	public int hashCode() {
@@ -55,7 +70,7 @@ public class Cozinheiro implements Serializable{
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
-	}
+	}	
 
 	@Override
 	public boolean equals(Object obj) {

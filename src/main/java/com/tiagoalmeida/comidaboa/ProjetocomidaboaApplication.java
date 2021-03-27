@@ -9,8 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.tiagoalmeida.comidaboa.domain.Cliente;
 import com.tiagoalmeida.comidaboa.domain.Cozinheiro;
+import com.tiagoalmeida.comidaboa.domain.Refeicao;
 import com.tiagoalmeida.comidaboa.repositories.ClienteRepository;
 import com.tiagoalmeida.comidaboa.repositories.CozinheiroRepository;
+import com.tiagoalmeida.comidaboa.repositories.RefeicaoRepository;
 
 @SpringBootApplication
 public class ProjetocomidaboaApplication implements CommandLineRunner{
@@ -20,22 +22,37 @@ public class ProjetocomidaboaApplication implements CommandLineRunner{
 	
 	@Autowired
 	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private RefeicaoRepository refeicaoRepository;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetocomidaboaApplication.class, args);
 	}
 
 	@Override
-	public void run(String... args) throws Exception {
+	public void run(String... args) throws Exception {			
 		
 		Cozinheiro coz1 = new Cozinheiro(null, "Pedro", "96857485");
-		Cozinheiro coz2 = new Cozinheiro(null, "João", "85749685");
+		Cozinheiro coz2 = new Cozinheiro(null, "João", "85749685");				
+
+		Refeicao ref1 = new Refeicao(null, "bife", 10.00, "rua anum, 00", 2,coz1);
+		Refeicao ref2 = new Refeicao(null, "lasanha", 15.00, "rua sla, 01", 2,coz1);
+		Refeicao ref3 = new Refeicao(null, "pizza", 10.00, "boi, 00", 2,coz2);
+		
+		coz1.getRefeicoes().addAll(Arrays.asList(ref1, ref2));
+		coz2.getRefeicoes().addAll(Arrays.asList(ref3));
+		
+		cozinheiroRepository.saveAll(Arrays.asList(coz1,coz2));
+		refeicaoRepository.saveAll(Arrays.asList(ref1, ref2));
 		
 		Cliente cli1 = new Cliente(null, "Neiva", "96857489");
 		Cliente cli2 = new Cliente(null, "Vania", "89748596");
 		
-		cozinheiroRepository.saveAll(Arrays.asList(coz1,coz2));
+		
 		clienteRepository.saveAll(Arrays.asList(cli1,cli2));
+		
 		
 	}
 
