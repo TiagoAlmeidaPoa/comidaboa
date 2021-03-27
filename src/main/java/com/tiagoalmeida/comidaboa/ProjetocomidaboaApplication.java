@@ -9,9 +9,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.tiagoalmeida.comidaboa.domain.Cliente;
 import com.tiagoalmeida.comidaboa.domain.Cozinheiro;
+import com.tiagoalmeida.comidaboa.domain.Pedido;
 import com.tiagoalmeida.comidaboa.domain.Refeicao;
 import com.tiagoalmeida.comidaboa.repositories.ClienteRepository;
 import com.tiagoalmeida.comidaboa.repositories.CozinheiroRepository;
+import com.tiagoalmeida.comidaboa.repositories.PedidoRepository;
 import com.tiagoalmeida.comidaboa.repositories.RefeicaoRepository;
 
 @SpringBootApplication
@@ -25,7 +27,9 @@ public class ProjetocomidaboaApplication implements CommandLineRunner{
 	
 	@Autowired
 	private RefeicaoRepository refeicaoRepository;
-
+	
+	@Autowired
+	private PedidoRepository pedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetocomidaboaApplication.class, args);
@@ -48,10 +52,17 @@ public class ProjetocomidaboaApplication implements CommandLineRunner{
 		refeicaoRepository.saveAll(Arrays.asList(ref1, ref2));
 		
 		Cliente cli1 = new Cliente(null, "Neiva", "96857489");
-		Cliente cli2 = new Cliente(null, "Vania", "89748596");
-		
+		Cliente cli2 = new Cliente(null, "Vania", "89748596");		
 		
 		clienteRepository.saveAll(Arrays.asList(cli1,cli2));
+		
+		Pedido ped1 = new Pedido(null, ref1, cli1);
+		Pedido ped2 = new Pedido(null, ref2, cli2);
+		
+		ref1.getPedidos().addAll(Arrays.asList(ped1));
+		ref2.getPedidos().addAll(Arrays.asList(ped2));
+		
+		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		
 		
 	}

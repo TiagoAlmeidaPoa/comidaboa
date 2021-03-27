@@ -1,0 +1,22 @@
+package com.tiagoalmeida.comidaboa.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.tiagoalmeida.comidaboa.domain.Pedido;
+import com.tiagoalmeida.comidaboa.repositories.PedidoRepository;
+
+@Service
+public class PedidoService {
+	
+	@Autowired
+	private PedidoRepository repository;
+	
+	public Pedido buscarPorId(Integer id) {
+		Optional<Pedido> obj = repository.findById(id);
+		return obj.orElse(null);
+	}
+
+}
