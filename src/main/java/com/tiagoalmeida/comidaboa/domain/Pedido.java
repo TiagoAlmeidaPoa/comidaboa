@@ -1,22 +1,29 @@
 package com.tiagoalmeida.comidaboa.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
-public class Pedido {
-	
+public class Pedido implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue()
 	private Integer id;
-	
+		
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "refeicao_id")
 	private Refeicao refeicao;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
