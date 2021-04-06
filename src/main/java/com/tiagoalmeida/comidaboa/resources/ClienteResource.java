@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tiagoalmeida.comidaboa.domain.Cliente;
 import com.tiagoalmeida.comidaboa.service.ClienteService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping(value = "/clientes")
+@Tag(name = "clientes")
 public class ClienteResource {
 
 	@Autowired

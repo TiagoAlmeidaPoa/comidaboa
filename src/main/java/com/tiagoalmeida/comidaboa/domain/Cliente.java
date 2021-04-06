@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-public class Cliente implements Serializable{
+public class Cliente extends EntityAbstract<Integer> implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
