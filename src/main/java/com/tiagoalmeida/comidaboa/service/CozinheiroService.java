@@ -9,7 +9,7 @@ import com.tiagoalmeida.comidaboa.domain.Cozinheiro;
 import com.tiagoalmeida.comidaboa.repositories.CozinheiroRepository;
 
 @Service
-public class CozinheiroService {
+public class CozinheiroService extends ServiceAbstract<CozinheiroRepository, Cozinheiro, Integer>{
 	
 	@Autowired
 	private CozinheiroRepository repository;

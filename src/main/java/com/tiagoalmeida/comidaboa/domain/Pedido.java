@@ -18,12 +18,10 @@ public class Pedido extends EntityAbstract<Integer> implements Serializable{
 	@GeneratedValue()
 	private Integer id;
 		
-	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "refeicao_id")
 	private Refeicao refeicao;
-	
-	@JsonManagedReference
+		
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;

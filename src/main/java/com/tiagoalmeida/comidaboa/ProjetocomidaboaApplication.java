@@ -5,7 +5,6 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.tiagoalmeida.comidaboa.domain.Cliente;
@@ -18,7 +17,6 @@ import com.tiagoalmeida.comidaboa.repositories.PedidoRepository;
 import com.tiagoalmeida.comidaboa.repositories.RefeicaoRepository;
 
 @SpringBootApplication
-@EnableAutoConfiguration
 public class ProjetocomidaboaApplication implements CommandLineRunner{
 	
 	@Autowired

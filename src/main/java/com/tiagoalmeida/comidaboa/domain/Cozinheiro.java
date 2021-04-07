@@ -11,9 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Cozinheiro implements Serializable{
+public class Cozinheiro extends EntityAbstract<Integer> implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -22,7 +23,7 @@ public class Cozinheiro implements Serializable{
 	private String nome;
 	private String telefone;		
 	
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "cozinheiro")
 	private List<Refeicao> refeicoes = new ArrayList<>();
 	
