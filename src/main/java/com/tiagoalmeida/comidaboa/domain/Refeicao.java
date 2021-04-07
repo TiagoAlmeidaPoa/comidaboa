@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-public class Refeicao implements Serializable{
+public class Refeicao extends EntityAbstract<Integer> implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id

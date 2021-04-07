@@ -9,7 +9,7 @@ import com.tiagoalmeida.comidaboa.domain.Refeicao;
 import com.tiagoalmeida.comidaboa.repositories.RefeicaoRepository;
 
 @Service
-public class RefeicaoService {
+public class RefeicaoService extends ServiceAbstract<RefeicaoRepository, Refeicao, Integer>{
 	
 	@Autowired
 	private RefeicaoRepository repository;
