@@ -18,5 +18,9 @@ public class RefeicaoService extends ServiceAbstract<RefeicaoRepository, Refeica
 		Optional<Refeicao> obj = repository.findById(id);
 		return obj.orElse(null);
 	}
+	
+	public void delete(Integer id) {
+		repository.deleteById(id);
+	}
 
 }

@@ -56,5 +56,9 @@ public class PedidoService extends ServiceAbstract<PedidoRepository, Pedido, Int
 		Refeicao refeicao = serviceRefeicao.buscarPorId(id);
 		return refeicao.getQuantidade() > 0;
 	}
+	
+	public void delete(Integer id) {
+		repository.deleteById(id);
+	}
 
 }

@@ -41,5 +41,11 @@ public class RefeicaoResource {
     public Refeicao salvar(@RequestBody Refeicao refeicao) {
         return service.salvar(refeicao);
     }
+	
+	@RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 
 }

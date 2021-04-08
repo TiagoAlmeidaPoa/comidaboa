@@ -39,5 +39,11 @@ public class PedidoResource {
     public Pedido salvar(@RequestBody Pedido pedido) {
         return service.salvar(pedido);
     }
+	
+	@RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 
 }
