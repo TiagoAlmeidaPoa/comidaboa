@@ -43,5 +43,11 @@ public class ClienteResource {
     public Cliente salvar(@RequestBody Cliente cliente) {
         return service.salvar(cliente);
     }
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<?> update(@RequestBody Cliente cliente, @PathVariable Integer id) {
+		cliente = service.editar(cliente, id);
+		return ResponseEntity.noContent().build();
+	}
 
 }

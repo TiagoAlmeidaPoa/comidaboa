@@ -87,6 +87,10 @@ public class Refeicao extends EntityAbstract<Integer> implements Serializable{
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
+	
+	public void subtraiQuantidade() {
+		this.quantidade = quantidade - 1;
+	}
 
 	public Cozinheiro getCozinheiro() {
 		return cozinheiro;
