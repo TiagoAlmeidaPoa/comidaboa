@@ -5,7 +5,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tiagoalmeida.comidaboa.domain.Cliente;
 import com.tiagoalmeida.comidaboa.domain.Cozinheiro;
+import com.tiagoalmeida.comidaboa.exceptions.ObjectNotFoundException;
 import com.tiagoalmeida.comidaboa.repositories.CozinheiroRepository;
 
 @Service
@@ -14,9 +16,11 @@ public class CozinheiroService extends ServiceAbstract<CozinheiroRepository, Coz
 	@Autowired
 	private CozinheiroRepository repository;
 	
-	public Cozinheiro buscarPorId(Integer id) {
+	@Override
+	public Cozinheiro porId(Integer id) {
 		Optional<Cozinheiro> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cozinheiro.class.getName()));
 	}
 
 }

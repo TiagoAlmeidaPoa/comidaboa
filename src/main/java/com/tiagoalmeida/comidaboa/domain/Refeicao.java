@@ -47,6 +47,15 @@ public class Refeicao extends EntityAbstract<Integer> implements Serializable{
 		this.quantidade = quantidade;
 		this.cozinheiro = cozinheiro;
 	}
+	
+	public Refeicao(Integer id, String nome, Double valor, String endereco, Cozinheiro cozinheiro) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.valor = valor;
+		this.endereco = endereco;
+		this.cozinheiro = cozinheiro;
+	}
 
 	public Integer getId() {
 		return id;

@@ -28,8 +28,8 @@ public class ClienteResource {
 	private ClienteService service;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Cliente obj = service.buscarPorId(id);
+	public ResponseEntity<?> findId(@PathVariable Integer id) {
+		Cliente obj = service.porId(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
@@ -47,6 +47,12 @@ public class ClienteResource {
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> update(@RequestBody Cliente cliente, @PathVariable Integer id) {
 		cliente = service.editar(cliente, id);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 

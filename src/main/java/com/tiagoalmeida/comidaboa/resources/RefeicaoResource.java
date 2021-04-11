@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tiagoalmeida.comidaboa.domain.Cozinheiro;
+import com.tiagoalmeida.comidaboa.domain.Pedido;
 import com.tiagoalmeida.comidaboa.domain.Refeicao;
 import com.tiagoalmeida.comidaboa.service.CozinheiroService;
 import com.tiagoalmeida.comidaboa.service.RefeicaoService;
@@ -27,7 +28,7 @@ public class RefeicaoResource {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Refeicao obj = service.buscarPorId(id);
+		Refeicao obj = service.porId(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
@@ -41,6 +42,12 @@ public class RefeicaoResource {
     public Refeicao salvar(@RequestBody Refeicao refeicao) {
         return service.salvar(refeicao);
     }
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<?> update(@RequestBody Refeicao refeicao, @PathVariable Integer id) {
+		refeicao = service.editar(refeicao, id);
+		return ResponseEntity.noContent().build();
+	}
 	
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {

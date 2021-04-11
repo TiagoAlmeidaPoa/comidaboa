@@ -15,7 +15,8 @@ public class ClienteService extends ServiceAbstract<ClienteRepository, Cliente, 
 	@Autowired
 	private ClienteRepository repository;
 	
-	public Cliente buscarPorId(Integer id) {
+	@Override
+	public Cliente porId(Integer id) {
 		Optional<Cliente> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));

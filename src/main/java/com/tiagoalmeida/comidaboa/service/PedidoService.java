@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tiagoalmeida.comidaboa.domain.Cliente;
 import com.tiagoalmeida.comidaboa.domain.Pedido;
 import com.tiagoalmeida.comidaboa.domain.Refeicao;
+import com.tiagoalmeida.comidaboa.exceptions.ObjectNotFoundException;
 import com.tiagoalmeida.comidaboa.repositories.PedidoRepository;
 
 @Service
@@ -18,10 +20,12 @@ public class PedidoService extends ServiceAbstract<PedidoRepository, Pedido, Int
 	
 	@Autowired
 	private RefeicaoService serviceRefeicao;
-
-	public Pedido buscarPorId(Integer id) {
+	
+	@Override
+	public Pedido porId(Integer id) {
 		Optional<Pedido> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
 	}
 
 	public List<Pedido> todos() {
@@ -30,35 +34,29 @@ public class PedidoService extends ServiceAbstract<PedidoRepository, Pedido, Int
 
 	@Override
 	public Pedido salvar(Pedido pedido) {
-		
-		try {
+	
 			if (verificaQuantidade(pedido)) {
 				consomeQuantidade(pedido);
+				Refeicao refeicao = pedido.getRefeicao();
+				Refeicao refeicao1 = new Refeicao(refeicao.getId(), refeicao.getNome(), refeicao.getValor(), refeicao.getEndereco(), refeicao.getCozinheiro());
+				pedido.setRefeicao(refeicao1);
 				return repository.save(pedido);				
+			} else {
+				throw new ObjectNotFoundException("Refeição esgotada...");
 			}
-
-		} catch (Exception e) {
-			e.getMessage();
-			return null;
-		}
-		return null;
 	}
 
 	private void consomeQuantidade(Pedido pedido) {
 		int id = pedido.getRefeicao().getId();
-		Refeicao refeicao = serviceRefeicao.buscarPorId(id);
+		Refeicao refeicao = serviceRefeicao.porId(id);
 		refeicao.subtraiQuantidade();
 		serviceRefeicao.editar(refeicao, id);
 	}
 	
 	private boolean verificaQuantidade(Pedido pedido) {
 		int id = pedido.getRefeicao().getId();
-		Refeicao refeicao = serviceRefeicao.buscarPorId(id);
+		Refeicao refeicao = serviceRefeicao.porId(id);
 		return refeicao.getQuantidade() > 0;
-	}
-	
-	public void delete(Integer id) {
-		repository.deleteById(id);
 	}
 
 }
