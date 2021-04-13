@@ -18,9 +18,10 @@ public class PedidoDTO implements Serializable {
 	public PedidoDTO(Pedido pedido) {
 		Refeicao refeicao = pedido.getRefeicao();
 		Refeicao refeicao1 = new Refeicao(refeicao.getId(), refeicao.getNome(), refeicao.getValor(), refeicao.getEndereco(), refeicao.getCozinheiro());
+		setRefeicao(refeicao1);
 		this.id = pedido.getId();
-		this.refeicao = null;
-		this.cliente = null;
+		this.refeicao = refeicao1;
+		this.cliente = pedido.getCliente();
 	}
 	
 	

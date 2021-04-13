@@ -3,9 +3,11 @@ package com.tiagoalmeida.comidaboa.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.tiagoalmeida.comidaboa.domain.Cliente;
 import com.tiagoalmeida.comidaboa.domain.Refeicao;
 import com.tiagoalmeida.comidaboa.exceptions.ObjectNotFoundException;
 import com.tiagoalmeida.comidaboa.repositories.RefeicaoRepository;
@@ -23,8 +25,9 @@ public class RefeicaoService extends ServiceAbstract<RefeicaoRepository, Refeica
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Refeicao.class.getName()));
 	}
 	
-	public void delete(Integer id) {
-		repository.deleteById(id);
-	}
+	public Page<Refeicao> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {		
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return repository.findAll(pageRequest);
+	}	
 
 }

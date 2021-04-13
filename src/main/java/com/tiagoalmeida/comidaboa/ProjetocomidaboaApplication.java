@@ -44,13 +44,23 @@ public class ProjetocomidaboaApplication implements CommandLineRunner{
 
 		Refeicao ref1 = new Refeicao(null, "bife", 10.00, "rua anum, 00", 2,coz1);
 		Refeicao ref2 = new Refeicao(null, "lasanha", 15.00, "rua sla, 01", 2,coz1);
-		Refeicao ref3 = new Refeicao(null, "pizza", 10.00, "boi, 00", 2,coz2);
+		Refeicao ref3 = new Refeicao(null, "pizza", 10.00, "boi, 23", 2,coz2);
 		
-		coz1.getRefeicoes().addAll(Arrays.asList(ref1, ref2));
-		coz2.getRefeicoes().addAll(Arrays.asList(ref3));
+		Refeicao ref4 = new Refeicao(null, "alcatra", 10.00, "rua anum, 40", 2,coz1);
+		Refeicao ref5 = new Refeicao(null, "alaminuta", 15.00, "rua bb, 110", 1,coz1);
+		Refeicao ref6 = new Refeicao(null, "risoliszza", 10.00, "rua mona, 220", 2,coz2);
+		Refeicao ref7 = new Refeicao(null, "hamburguer", 10.00, "rua picles, 49", 1,coz1);
+		Refeicao ref8 = new Refeicao(null, "fricace", 15.00, "rua pedro joaquim, 03", 1,coz1);
+		Refeicao ref9 = new Refeicao(null, "massa ao molho", 10.00, "rua carlos freitas, 11", 2,coz2);
+		Refeicao ref10 = new Refeicao(null, "feijoada", 10.00, "av Pires Maia, 04", 2,coz1);
+		Refeicao ref11 = new Refeicao(null, "carreteiro", 15.00, "rua silas, 01", 2,coz1);
+		Refeicao ref12= new Refeicao(null, "estrogonofe", 10.00, "rua frodo, 22", 2,coz2);
+		
+		coz1.getRefeicoes().addAll(Arrays.asList(ref1, ref2, ref4, ref5, ref7, ref8, ref10, ref11));
+		coz2.getRefeicoes().addAll(Arrays.asList(ref3, ref6, ref9, ref12));
 		
 		cozinheiroRepository.saveAll(Arrays.asList(coz1,coz2));
-		refeicaoRepository.saveAll(Arrays.asList(ref1, ref2));
+		refeicaoRepository.saveAll(Arrays.asList(ref1, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, ref10, ref11, ref12));
 		
 		Cliente cli1 = new Cliente(null, "Neiva", "96857489");
 		Cliente cli2 = new Cliente(null, "Vania", "89748596");		
