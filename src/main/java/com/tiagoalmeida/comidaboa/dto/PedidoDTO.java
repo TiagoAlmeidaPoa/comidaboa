@@ -15,22 +15,24 @@ public class PedidoDTO implements Serializable {
 	
 	public PedidoDTO() {}
 	
-	public PedidoDTO(Pedido pedido) {
-		Refeicao refeicao = pedido.getRefeicao();
-		Refeicao refeicao1 = new Refeicao(refeicao.getId(), refeicao.getNome(), refeicao.getValor(), refeicao.getEndereco(), refeicao.getCozinheiro());
-		setRefeicao(refeicao1);
-		this.id = pedido.getId();
-		this.refeicao = refeicao1;
-		this.cliente = pedido.getCliente();
-	}
+//	public PedidoDTO(Pedido pedido) {
+//		Refeicao refeicao = pedido.getRefeicao();
+//		Refeicao refeicao1 = new Refeicao(refeicao.getId(), refeicao.getNome(), refeicao.getValor(), refeicao.getEndereco(), refeicao.getCozinheiro());
+//		setRefeicao(refeicao1);
+//		this.id = pedido.getId();
+//		this.refeicao = refeicao1;
+//		this.cliente = pedido.getCliente();
+//	}
 	
 	
 
-//	public PedidoDTO(Pedido pedido) {
-//		this.id = pedido.getId();
-//		this.refeicao = pedido.getRefeicao();
-//		this.cliente = pedido.getCliente();
-//	}
+	public PedidoDTO(Pedido pedido) {
+		this.id = pedido.getId();
+		pedido.getRefeicao().setQuantidade(null);
+		this.refeicao = pedido.getRefeicao();
+		
+		this.cliente = pedido.getCliente();
+	}
 
 	public Integer getId() {
 		return id;
