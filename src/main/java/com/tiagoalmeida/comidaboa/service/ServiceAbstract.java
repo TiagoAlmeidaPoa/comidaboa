@@ -10,8 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.tiagoalmeida.comidaboa.domain.Cliente;
 import com.tiagoalmeida.comidaboa.domain.EntityAbstract;
 import com.tiagoalmeida.comidaboa.exceptions.DataIntegrityException;
 import com.tiagoalmeida.comidaboa.exceptions.ObjectNotFoundException;
@@ -23,7 +23,7 @@ public abstract class ServiceAbstract<
 	@Autowired
 	protected R repository;
 	
-	
+	@Transactional
 	public E salvar(E entidade) {
 		try {
 			return repository.save(entidade);
