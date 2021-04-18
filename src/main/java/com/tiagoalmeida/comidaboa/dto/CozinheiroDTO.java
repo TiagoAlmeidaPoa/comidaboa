@@ -6,9 +6,9 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.tiagoalmeida.comidaboa.domain.Cliente;
+import com.tiagoalmeida.comidaboa.domain.Cozinheiro;
 
-public class ClienteDTO implements Serializable{
+public class CozinheiroDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
@@ -20,9 +20,9 @@ public class ClienteDTO implements Serializable{
 	@NotEmpty(message = "Preenchimento obrigatorio")	
 	private String telefone;
 	
-	public ClienteDTO() {}
+	public CozinheiroDTO() {}
 	
-	public ClienteDTO(Cliente cliente) {
+	public CozinheiroDTO(Cozinheiro cliente) {
 		this.id = cliente.getId();
 		this.nome = cliente.getNome();
 		this.telefone = cliente.getTelefone();

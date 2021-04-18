@@ -6,8 +6,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.tiagoalmeida.comidaboa.domain.Cliente;
 import com.tiagoalmeida.comidaboa.domain.EntityAbstract;
 import com.tiagoalmeida.comidaboa.exceptions.DataIntegrityException;
 import com.tiagoalmeida.comidaboa.exceptions.ObjectNotFoundException;
@@ -59,6 +63,11 @@ public abstract class ServiceAbstract<
     		throw new ObjectNotFoundException("Id: "+id+" não encontrado no banco de dados");
     	}
 		
+	}
+    
+    public Page<E> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {		
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return repository.findAll(pageRequest);
 	}
 
 }

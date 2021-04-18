@@ -37,9 +37,6 @@ public class PedidoService extends ServiceAbstract<PedidoRepository, Pedido, Int
 	
 			if (verificaQuantidade(pedido)) {
 				consomeQuantidade(pedido);
-				Refeicao refeicao = pedido.getRefeicao();
-				Refeicao refeicao1 = new Refeicao(refeicao.getId(), refeicao.getNome(), refeicao.getValor(), refeicao.getEndereco(), refeicao.getCozinheiro());
-				pedido.setRefeicao(refeicao1);
 				return repository.save(pedido);				
 			} else {
 				throw new ObjectNotFoundException("Refeição esgotada...");

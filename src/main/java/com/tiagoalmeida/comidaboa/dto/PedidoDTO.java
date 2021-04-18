@@ -10,28 +10,19 @@ public class PedidoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
-	private Refeicao refeicao;
+	private RefeicaoDTO refeicaoDTO;
 	private Cliente cliente;
 	
 	public PedidoDTO() {}
 	
-//	public PedidoDTO(Pedido pedido) {
-//		Refeicao refeicao = pedido.getRefeicao();
-//		Refeicao refeicao1 = new Refeicao(refeicao.getId(), refeicao.getNome(), refeicao.getValor(), refeicao.getEndereco(), refeicao.getCozinheiro());
-//		setRefeicao(refeicao1);
-//		this.id = pedido.getId();
-//		this.refeicao = refeicao1;
-//		this.cliente = pedido.getCliente();
-//	}
-	
-	
-
 	public PedidoDTO(Pedido pedido) {
 		this.id = pedido.getId();
-		pedido.getRefeicao().setQuantidade(null);
-		this.refeicao = pedido.getRefeicao();
-		
+		this.refeicaoDTO = criaRefeicaoDTO(pedido.getRefeicao());		
 		this.cliente = pedido.getCliente();
+	}
+	
+	public RefeicaoDTO criaRefeicaoDTO(Refeicao refeicao) {
+		return new RefeicaoDTO(refeicao);
 	}
 
 	public Integer getId() {
@@ -42,12 +33,12 @@ public class PedidoDTO implements Serializable {
 		this.id = id;
 	}
 
-	public Refeicao getRefeicao() {
-		return refeicao;
+	public RefeicaoDTO getRefeicaoDTO() {
+		return refeicaoDTO;
 	}
 
-	public void setRefeicao(Refeicao refeicao) {
-		this.refeicao = refeicao;
+	public void setRefeicaoDTO(RefeicaoDTO refeicaoDTO) {
+		this.refeicaoDTO = refeicaoDTO;
 	}
 
 	public Cliente getCliente() {
@@ -56,6 +47,6 @@ public class PedidoDTO implements Serializable {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
-	}	
-
+	}
+	
 }

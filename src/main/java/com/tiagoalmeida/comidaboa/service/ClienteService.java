@@ -3,9 +3,13 @@ package com.tiagoalmeida.comidaboa.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.tiagoalmeida.comidaboa.domain.Cliente;
+import com.tiagoalmeida.comidaboa.domain.Refeicao;
 import com.tiagoalmeida.comidaboa.dto.ClienteDTO;
 import com.tiagoalmeida.comidaboa.exceptions.ObjectNotFoundException;
 import com.tiagoalmeida.comidaboa.repositories.ClienteRepository;
@@ -26,5 +30,5 @@ public class ClienteService extends ServiceAbstract<ClienteRepository, Cliente, 
 	public Cliente fromDTO(ClienteDTO clienteDTO) {
 		return new Cliente(clienteDTO.getId(), clienteDTO.getNome(), clienteDTO.getTelefone());
 	}
-
+	
 }
