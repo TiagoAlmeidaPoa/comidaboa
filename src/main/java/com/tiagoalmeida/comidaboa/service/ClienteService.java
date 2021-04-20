@@ -6,12 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tiagoalmeida.comidaboa.domain.Cliente;
 import com.tiagoalmeida.comidaboa.domain.Refeicao;
 import com.tiagoalmeida.comidaboa.dto.ClienteDTO;
 import com.tiagoalmeida.comidaboa.exceptions.ObjectNotFoundException;
+import com.tiagoalmeida.comidaboa.exceptions.ValidationError;
 import com.tiagoalmeida.comidaboa.repositories.ClienteRepository;
 
 @Service

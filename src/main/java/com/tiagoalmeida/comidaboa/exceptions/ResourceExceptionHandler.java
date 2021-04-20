@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -33,6 +34,18 @@ public class ResourceExceptionHandler {
 		for(FieldError x : e.getBindingResult().getFieldErrors()) {
 			error.addError(x.getField(), x.getDefaultMessage());
 		}
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);		
+	}
+	
+	
+	@ExceptionHandler(UnexpectedRollbackException.class)
+	public ResponseEntity<StandardError> validationTelefone(UnexpectedRollbackException e, HttpServletRequest request) {
+		
+		ValidationError error = new ValidationError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), "Numero invalido", "numero já cadastrado !", request.getRequestURI());
+		
+		
+			error.addError("telefone", "numero já cadastrado");
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);		
 	}
