@@ -42,10 +42,10 @@ public class ResourceExceptionHandler {
 	@ExceptionHandler(UnexpectedRollbackException.class)
 	public ResponseEntity<StandardError> validationTelefone(UnexpectedRollbackException e, HttpServletRequest request) {
 		
-		ValidationError error = new ValidationError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), "Numero invalido", "numero já cadastrado !", request.getRequestURI());
+		ValidationError error = new ValidationError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), "Número invalido", "Este número já esta sendo utilizado !", request.getRequestURI());
 		
 		
-			error.addError("telefone", "numero já cadastrado");
+			error.addError("telefone", "Número já cadastrado");
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);		
 	}
