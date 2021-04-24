@@ -12,6 +12,7 @@ public class RefeicaoDTO implements Serializable{
 	private String nome;
 	private Double valor;
 	private String endereco;
+	private String descricao;
 	private Cozinheiro cozinheiro;
 	
 	public RefeicaoDTO() {}
@@ -22,6 +23,7 @@ public class RefeicaoDTO implements Serializable{
 		this.nome = refeicao.getNome();
 		this.valor = refeicao.getValor();
 		this.endereco = refeicao.getEndereco();
+		this.descricao = refeicao.getDescricao();
 		this.cozinheiro = refeicao.getCozinheiro();	
 	}
 
@@ -55,6 +57,14 @@ public class RefeicaoDTO implements Serializable{
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}	
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public Cozinheiro getCozinheiro() {

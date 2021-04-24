@@ -27,6 +27,7 @@ public class Refeicao extends EntityAbstract<Integer> implements Serializable{
 	private Double valor;
 	private String endereco;
 	private Integer quantidade;
+	private String descricao;
 	
 	@ManyToOne
 	@JoinColumn(name = "cozinheiro_id")
@@ -38,13 +39,14 @@ public class Refeicao extends EntityAbstract<Integer> implements Serializable{
 			
 	public Refeicao() {}
 
-	public Refeicao(Integer id, String nome, Double valor, String endereco, Integer quantidade, Cozinheiro cozinheiro) {
+	public Refeicao(Integer id, String nome, Double valor, String endereco, Integer quantidade, String descricao, Cozinheiro cozinheiro) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.valor = valor;
 		this.endereco = endereco;
 		this.quantidade = quantidade;
+		this.descricao = descricao;
 		this.cozinheiro = cozinheiro;
 	}
 
@@ -90,6 +92,14 @@ public class Refeicao extends EntityAbstract<Integer> implements Serializable{
 	
 	public void subtraiQuantidade() {
 		this.quantidade = quantidade - 1;
+	}	
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public Cozinheiro getCozinheiro() {
